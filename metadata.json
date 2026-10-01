@@ -1,0 +1,6 @@
+{
+  "name": "OmniStream - Futuristic Video & Audio Downloader",
+  "description": "Ultra-fast, futuristic dark-mode media downloader and audio extractor for YouTube, Instagram Reels, and Facebook with MP4/MP3 format controls and Gemini 3.1 Pro High-Thinking media intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

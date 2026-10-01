@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "downloadItem": {
+      "title": "Download Item",
+      "description": "Record of downloaded video or audio media item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "thumbnail": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "author": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "duration": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "platform": {
+          "type": "string",
+          "enum": ["youtube", "instagram", "facebook", "generic"]
+        },
+        "formatType": {
+          "type": "string",
+          "enum": ["video", "audio"]
+        },
+        "quality": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "downloadedAt": {
+          "type": "number"
+        },
+        "fileSize": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": ["id", "url", "title", "platform", "formatType", "quality", "downloadedAt"]
+    }
+  },
+  "firestore": {
+    "/downloads/{downloadId}": {
+      "schema": "downloadItem",
+      "description": "Collection of downloaded media files and history"
+    }
+  }
+}

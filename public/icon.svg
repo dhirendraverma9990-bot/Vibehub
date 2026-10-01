@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07090e" />
+      <stop offset="50%" stop-color="#0d1322" />
+      <stop offset="100%" stop-color="#05070a" />
+    </linearGradient>
+    <linearGradient id="cyanPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  
+  <!-- Outer glowing cyan-purple ring -->
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="none" stroke="url(#cyanPurple)" stroke-width="8" opacity="0.6" />
+
+  <!-- Center Hexagon / Circular Shield Glow -->
+  <circle cx="256" cy="256" r="160" fill="#06b6d4" opacity="0.12" filter="url(#glow)" />
+  <circle cx="256" cy="256" r="130" fill="#a855f7" opacity="0.1" filter="url(#glow)" />
+
+  <!-- Stylized Downloader Arrow & Stream Waves -->
+  <g filter="url(#glow)">
+    <!-- Top Arc Stream -->
+    <path d="M160 210 C160 156, 352 156, 352 210" fill="none" stroke="url(#cyanPurple)" stroke-width="20" stroke-linecap="round" />
+    
+    <!-- Downward Arrow Stem -->
+    <line x1="256" y1="170" x2="256" y2="310" stroke="url(#cyanPurple)" stroke-width="24" stroke-linecap="round" />
+    
+    <!-- Arrow Head -->
+    <path d="M196 265 L256 325 L316 265" fill="none" stroke="url(#cyanPurple)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Tray / Base Line -->
+    <path d="M170 355 L342 355" fill="none" stroke="#06b6d4" stroke-width="22" stroke-linecap="round" />
+  </g>
+
+  <!-- Glowing Accent Dots -->
+  <circle cx="256" cy="395" r="8" fill="#a855f7" />
+</svg>

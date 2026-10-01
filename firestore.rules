@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidDownloadItem(data) {
+      return data.keys().hasAll(['id', 'url', 'title', 'platform', 'formatType', 'quality', 'downloadedAt']) &&
+        data.keys().hasOnly(['id', 'url', 'title', 'thumbnail', 'author', 'duration', 'platform', 'formatType', 'quality', 'downloadedAt', 'fileSize', 'userId']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.url is string && data.url.size() <= 2048 &&
+        data.title is string && data.title.size() <= 300 &&
+        (!('thumbnail' in data) || (data.thumbnail is string && data.thumbnail.size() <= 2048)) &&
+        (!('author' in data) || (data.author is string && data.author.size() <= 150)) &&
+        (!('duration' in data) || (data.duration is string && data.duration.size() <= 50)) &&
+        (data.platform in ['youtube', 'instagram', 'facebook', 'generic']) &&
+        (data.formatType in ['video', 'audio']) &&
+        data.quality is string && data.quality.size() <= 50 &&
+        data.downloadedAt is number &&
+        (!('fileSize' in data) || (data.fileSize is string && data.fileSize.size() <= 50)) &&
+        (!('userId' in data) || (data.userId is string && data.userId.size() <= 128));
+    }
+
+    match /downloads/{downloadId} {
+      allow get, list: if true;
+      allow create: if isValidId(downloadId) && isValidDownloadItem(request.resource.data);
+      allow update: if false;
+      allow delete: if isValidId(downloadId);
+    }
+  }
+}
